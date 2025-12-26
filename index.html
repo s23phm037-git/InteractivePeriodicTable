@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Periodic Table</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>⚛️ Interactive Periodic Table</h1>
+    </header>
+
+    <main>
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Search by Name or Symbol (e.g., Oxygen, O)">
+            <select id="categoryFilter">
+                <option value="">Filter by Category</option>
+            </select>
+            <button id="darkModeToggle">Enable Dark Mode</button>
+        </div>
+
+        <!-- Category Legend/Key -->
+        <div id="legend">
+            <h2>Category Legend</h2>
+        </div>
+
+        <!-- The main Periodic Table Container -->
+        <div id="periodicTable">
+            <!-- Elements will be dynamically inserted by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Detailed Information Modal (Click Action) -->
+    <div id="elementModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalName" class="text-xl font-bold"></h2>
+            <p><strong>Atomic Number:</strong> <span id="modalNumber"></span></p>
+            <p><strong>Symbol:</strong> <span id="modalSymbol"></span></p>
+            <p><strong>Atomic Mass:</strong> <span id="modalMass"></span></p>
+            <p><strong>Category:</strong> <span id="modalCategory"></span></p>
+            <hr class="my-2">
+            <p id="modalDescription" class="italic text-sm"></p>
+        </div>
+    </div>
+
+    <!-- Tooltip (Hover Effect) -->
+    <div id="elementTooltip" class="tooltip">
+        <!-- Content will be dynamically inserted by JavaScript -->
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
