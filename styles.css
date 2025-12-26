@@ -1,0 +1,335 @@
+/* --- Global Styles and Reset --- */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f9;
+    color: #333;
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark Mode Toggle Styles */
+body.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+body.dark-mode header {
+    background-color: #333;
+}
+body.dark-mode .element-tile {
+    border-color: #444;
+}
+body.dark-mode #legend {
+    background: #2a2a2a;
+}
+body.dark-mode .modal-content {
+    background-color: #2a2a2a;
+}
+body.dark-mode #searchInput, body.dark-mode #categoryFilter, body.dark-mode #darkModeToggle {
+    background-color: #333;
+    color: #e0e0e0;
+    border-color: #555;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+}
+
+main {
+    padding: 20px;
+}
+
+/* --- Controls and Search/Filter/Toggle --- */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    max-width: 1400px;
+    margin: 0 auto 20px auto;
+}
+
+#searchInput, #categoryFilter, #darkModeToggle {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    flex-grow: 1;
+    max-width: 350px;
+    min-width: 150px;
+    transition: all 0.3s ease;
+}
+
+#darkModeToggle {
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+    flex-grow: 0;
+}
+
+/* --- Periodic Table Grid Layout --- */
+#periodicTable {
+    display: grid;
+    grid-template-columns: repeat(18, 1fr); 
+    gap: 3px; 
+    max-width: 1400px;
+    margin: 0 auto;
+    user-select: none;
+    overflow-x: auto; /* Allow horizontal scroll if necessary on mobile */
+}
+
+/* --- Element Tile Styling --- */
+.element-tile {
+    height: 90px; 
+    border: 1px solid #ddd;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s;
+    border-radius: 6px;
+    position: relative;
+    font-weight: 500;
+}
+
+.element-tile.placeholder {
+    border: 1px dashed #666;
+    background-color: transparent !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    cursor: default;
+}
+
+.element-tile.placeholder .name {
+    font-size: 0.7em;
+    white-space: normal;
+}
+
+.empty-space {
+    height: 90px;
+}
+
+.f-block-gap {
+    height: 20px;
+}
+
+.element-tile:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.atomic-number {
+    font-size: 0.75em;
+    align-self: flex-start;
+    font-weight: bold;
+}
+
+.symbol {
+    font-size: 2.2em;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.name {
+    font-size: 0.6em;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+/* --- Category Color Coding --- */
+.element-tile { color: #222; }
+
+.category-alkali-metal { background-color: #ffb3b3; } /* Reddish Pink */
+.category-alkaline-earth-metal { background-color: #ffdb80; } /* Pale Orange */
+.category-transition-metal { background-color: #c9e6ff; } /* Light Blue-Grey */
+.category-post-transition-metal { background-color: #8ce1b5; } /* Mint Green */
+.category-metalloid { background-color: #79d2b2; } /* Teal-Green */
+.category-nonmetal { background-color: #b0c4de; } /* Light Slate Gray */
+.category-halogen { background-color: #ccccff; } /* Lavender */
+.category-noble-gas { background-color: #e0b0ff; } /* Violet */
+.category-lanthanide { background-color: #fffacd; } /* Lemon Chiffon */
+.category-actinide { background-color: #ffe4c4; } /* Bisque */
+.category-unknown { background-color: #eee; border-color: #bbb;} 
+
+body.dark-mode .element-tile:not(.placeholder) { color: #1e1e1e; }
+body.dark-mode .category-unknown { background-color: #444; color: #ccc;}
+
+/* --- Search and Filter Highlight --- */
+.highlight {
+    border: 4px solid #ff7f50 !important; /* Coral */
+    box-shadow: 0 0 20px rgba(255, 127, 80, 0.7);
+    transform: scale(1.08);
+    z-index: 20;
+}
+
+/* --- Tooltip (Hover Info Panel) --- */
+.tooltip {
+    position: fixed;
+    background-color: rgba(30, 30, 30, 0.95);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 1000;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    min-width: 180px;
+}
+
+.tooltip-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #555;
+    padding-bottom: 3px;
+}
+
+/* --- Modal Popup (Click Info) --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding-top: 50px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 12px;
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-button:hover, .close-button:focus {
+    color: #d9534f; /* Danger red */
+    text-decoration: none;
+}
+
+/* --- Legend Styling --- */
+#legend {
+    margin: 20px auto;
+    padding: 15px;
+    background: #e9ecef;
+    border-radius: 8px;
+    max-width: 1400px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+#legend h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.legend-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 25px;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.legend-color {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* --- Responsive Design (Mobile View) --- */
+@media (max-width: 1200px) {
+    /* Reduce overall size to fit on tablets */
+    .element-tile {
+        height: 80px;
+    }
+    .symbol { font-size: 1.8em; }
+}
+
+@media (max-width: 768px) {
+    main { padding: 10px; }
+    header h1 { font-size: 1.5em; }
+
+    .controls {
+        flex-direction: column;
+    }
+    
+    #searchInput, #categoryFilter, #darkModeToggle {
+        max-width: 100%;
+    }
+
+    /* Further reduce tile size for narrow screens */
+    .element-tile {
+        height: 55px; 
+        padding: 3px;
+        border-radius: 4px;
+    }
+
+    .symbol {
+        font-size: 1.4em;
+    }
+
+    .atomic-number, .name {
+        font-size: 0.5em;
+    }
+    
+    .legend-content {
+        justify-content: flex-start;
+    }
+    
+    .modal-content {
+        padding: 20px;
+        margin: 20px auto;
+    }
+}
